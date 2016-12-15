@@ -1,74 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hello world</title>
-  
-  <link href="/atom.xml" rel="self"/>
-  
-  <link href="http://www.zhz.io/"/>
-  <updated>2016-12-15T09:01:08.000Z</updated>
-  <id>http://www.zhz.io/</id>
-  
-  <author>
-    <name>HongZhi</name>
-    
-  </author>
-  
-  <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Cocoapods常用命令</title>
-    <link href="http://www.zhz.io/2016/12/15/Cocoapods%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://www.zhz.io/2016/12/15/Cocoapods常用命令/</id>
-    <published>2016-12-15T08:57:23.000Z</published>
-    <updated>2016-12-15T09:01:08.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="0x00-Pod基础"><a href="#0x00-Pod基础" class="headerlink" title="0x00 Pod基础"></a>0x00 Pod基础</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod --help 这个可以用来所有的命令</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pod [Commond] [Options]</div><div class="line">$ pod install --verbose --no-repo-update</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">文件目录</div><div class="line">which pod Pod组件安装的目录</div><div class="line"></div><div class="line">Find里面进入./cocoapods可以看到你本地所有的仓库</div></pre></td></tr></table></figure>
-<p>Commonds<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod setup 重新安装master仓库，最好别用。因为会把master库删掉，然后下载又很慢，可以用Airdrop让别人给你传一份。</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pod install  </div><div class="line">官方说法:Install project dependencies according to versions from a Podfile.lock</div><div class="line">解释:解析.podfile文件，跟本地的podfile进行比对，并按不同之处重新进行依赖关系修复。</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">pod update </div><div class="line">官方说法:Update outdated project dependencies and create new Podfile.lock</div><div class="line">解释:解析.podfile文件，忽略本地的Podfile.lock文件，重新生成Podfile</div><div class="line"></div><div class="line">pod update Your_Project_Name</div><div class="line">解释:仅仅更新Name仓库</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pod search [name]</div><div class="line">官方说法:Search for pods</div><div class="line">解释:扫描本地的./cocoapods目录下所有的podspec。匹配含有name的项目</div></pre></td></tr></table></figure>
-<p>Options </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">--verbose </div><div class="line">官方说法:Show more debugging information</div><div class="line">解释:显示出所有Debug信息</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">--no-repo-update</div><div class="line">解释:不去更新现有的本地仓库（包括master，和私有的）</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--version 当前使用Cocoapods的版本</div></pre></td></tr></table></figure>
-<p>###本地gems的程序安装包，可以看到Cocoapods一共安装了那些组件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem list</div></pre></td></tr></table></figure></p>
-<p>###找到对应的组件，可以移除安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo gem uninstall cocoapods -v 0.35.0</div></pre></td></tr></table></figure></p>
-<p>###安装制定版本的安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo gem install cocoapods -v 0.34.4</div></pre></td></tr></table></figure></p>
-<p>###查看本地的源路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem sources -l</div></pre></td></tr></table></figure></p>
-<p>###切换Gem Source<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#淘宝的据说已经不维护了</div><div class="line">$ gem sources --add https://gems.ruby-china.org/ #添加源</div><div class="line">$ gem sources --remove https://rubygems.org/ #移除源</div></pre></td></tr></table></figure></p>
-<h1 id="0x00-Pod进阶"><a href="#0x00-Pod进阶" class="headerlink" title="0x00 Pod进阶"></a>0x00 Pod进阶</h1><p>Commonds<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">pod cache </div><div class="line">官方解释:Manipulate the CocoaPods cache</div><div class="line">解释:本地的依赖库缓存，不是项目工程Pods下的缓存。</div><div class="line"></div><div class="line">pod cache list 显示所有的本地缓存</div><div class="line">pod cache clean Your_Project_Name --all 清除所有的Your_Project_Name在本地的缓存</div><div class="line">pod cache clean Your_Project_Name 会显示出所有的Your_Project_Name缓存，然后再根据你想要的去清除</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pod repo 管理仓库的命令</div><div class="line">pod repo update 更新本地所有仓库</div><div class="line">pod repo update [Name] 仅仅更新Name仓库</div><div class="line">pod repo push [Name.podspec] [本地仓库名字] 推送一个私有项目的配置文件podspec 到制定的私有仓库</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod trunk 将项目配置推送到公共的master仓库</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pod outdated</div><div class="line">官方说法:Show outdated project dependencies</div><div class="line">解释:分析现有的依赖项，并与最新的比较。如图所示</div></pre></td></tr></table></figure>
-<p>###运行不同版本的pod前提是你本地有不同版本的pod<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod _1.0.1_ install</div></pre></td></tr></table></figure></p>
-<h1 id="0x00-Pod插件"><a href="#0x00-Pod插件" class="headerlink" title="0x00 Pod插件"></a>0x00 Pod插件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem install cocoapods-package 安装用来打包成静态库的插件</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod package [Name.podspec] [Options]</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">--force 替换本地已有的文件</div><div class="line">--no-mangle 接触Pod中已有的依赖冠以</div><div class="line">--library 打包成.a静态库</div><div class="line">--exclude-deps 不把依赖项打包进入项目</div><div class="line">--spec-sources=private,https://github.com/CocoaPods/Specs.git 如果项目中有私有源一定要加上这个</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;0x00-Pod基础&quot;&gt;&lt;a href=&quot;#0x00-Pod基础&quot; class=&quot;headerlink&quot; title=&quot;0x00 Pod基础&quot;&gt;&lt;/a&gt;0x00 Pod基础&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;pod --help 这个可以用来所有的命令&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ pod [Commond] [Options]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ pod install --verbose --no-repo-update&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-    
-      <category term="Cocoapods" scheme="http://www.zhz.io/tags/Cocoapods/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Share Keychain Access</title>
-    <link href="http://www.zhz.io/2016/08/25/Shared%20Keychain%20Access/"/>
-    <id>http://www.zhz.io/2016/08/25/Shared Keychain Access/</id>
-    <published>2016-08-25T08:57:23.000Z</published>
-    <updated>2016-12-15T09:02:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-什么是Keychain"><a href="#0x00-什么是Keychain" class="headerlink" title="0x00 什么是Keychain"></a>0x00 什么是Keychain</h2><p>据介绍，Keychain是iOS系统官方提供的安全存储容器，我们可以用它来存一些敏感信息，EG:密码，用户名，证书等等。<br>Mac电脑上自带的Keychain Access.app就是苹果自己的Keychain读取软件。<br>Keychain是保存在沙盒之外的数据库的，所以在删除App后，在重新下载App后，这些信息依旧存在，并且你可以通过设置一些属性，让你的数据保#####存到iCloud中，达到跨设备存储。</p>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Share Keychain Access · Hello world</title><meta name="description" content="Share Keychain Access - HongZhi"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://www.zhz.io/atom.xml" title="Hello world"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/nianran" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">Share Keychain Access</h1><div class="post-info">Aug 25, 2016</div><div class="post-content"><h2 id="0x00-什么是Keychain"><a href="#0x00-什么是Keychain" class="headerlink" title="0x00 什么是Keychain"></a>0x00 什么是Keychain</h2><p>据介绍，Keychain是iOS系统官方提供的安全存储容器，我们可以用它来存一些敏感信息，EG:密码，用户名，证书等等。<br>Mac电脑上自带的Keychain Access.app就是苹果自己的Keychain读取软件。<br>Keychain是保存在沙盒之外的数据库的，所以在删除App后，在重新下载App后，这些信息依旧存在，并且你可以通过设置一些属性，让你的数据保#####存到iCloud中，达到跨设备存储。</p>
 <h2 id="0x01-Keychain本质是什么"><a href="#0x01-Keychain本质是什么" class="headerlink" title="0x01 Keychain本质是什么"></a>0x01 Keychain本质是什么</h2><p>Keychain存储本质是Sqlite。真机地址：/private/var/Keychains/keychain-2.db<br>既然是Sqlite，那么Keychain存储的对象（后面统称为Item），即对应Sqlite上的一条记录而已。</p>
 <a id="more"></a>
 <h2 id="0x02-Item"><a href="#0x02-Item" class="headerlink" title="0x02 Item"></a>0x02 Item</h2><p>Item 结构</p>
@@ -175,18 +105,12 @@
 <h2 id="0xfe-总结"><a href="#0xfe-总结" class="headerlink" title="0xfe 总结"></a>0xfe 总结</h2><p>Keychain很方便，支持App间，设备间数据的传输，为一大群开发者解决了一堆的难题，但是也不能过度依赖于这个东西。Keychain的读取速度是NSUserDefault的3倍时长左右。一些简单的数据存储在Info.plist或者NSUserdefault中反而会更好。</p>
 <h2 id="0xff-参考链接"><a href="#0xff-参考链接" class="headerlink" title="0xff 参考链接"></a>0xff 参考链接</h2><p><a href="https://developer.apple.com/videos/play/wwdc2013/709/" target="_blank" rel="external">2013届WWDC Keychain简介</a><br><a href="http://blog.sheliw.com/blog/2015/02/16/keychain/" target="_blank" rel="external">Max Blog Keychain</a></p>
 <p>∑∑</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-什么是Keychain&quot;&gt;&lt;a href=&quot;#0x00-什么是Keychain&quot; class=&quot;headerlink&quot; title=&quot;0x00 什么是Keychain&quot;&gt;&lt;/a&gt;0x00 什么是Keychain&lt;/h2&gt;&lt;p&gt;据介绍，Keychain是iOS系统官方提供的安全存储容器，我们可以用它来存一些敏感信息，EG:密码，用户名，证书等等。&lt;br&gt;Mac电脑上自带的Keychain Access.app就是苹果自己的Keychain读取软件。&lt;br&gt;Keychain是保存在沙盒之外的数据库的，所以在删除App后，在重新下载App后，这些信息依旧存在，并且你可以通过设置一些属性，让你的数据保#####存到iCloud中，达到跨设备存储。&lt;/p&gt;
-&lt;h2 id=&quot;0x01-Keychain本质是什么&quot;&gt;&lt;a href=&quot;#0x01-Keychain本质是什么&quot; class=&quot;headerlink&quot; title=&quot;0x01 Keychain本质是什么&quot;&gt;&lt;/a&gt;0x01 Keychain本质是什么&lt;/h2&gt;&lt;p&gt;Keychain存储本质是Sqlite。真机地址：/private/var/Keychains/keychain-2.db&lt;br&gt;既然是Sqlite，那么Keychain存储的对象（后面统称为Item），即对应Sqlite上的一条记录而已。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="http://www.zhz.io/tags/iOS/"/>
-    
-  </entry>
-  
-</feed>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/12/15/Cocoapods常用命令/" class="prev">PREV</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'zhz';
+var disqus_identifier = '2016/08/25/Shared Keychain Access/';
+var disqus_title = 'Share Keychain Access';
+var disqus_url = 'http://www.zhz.io/2016/08/25/Shared Keychain Access/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//zhz.disqus.com/count.js" async></script><div class="copyright"><p>© 2016 <a href="http://www.zhz.io">HongZhi</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-82278125-1",'auto');ga('send','pageview');</script></body></html>
