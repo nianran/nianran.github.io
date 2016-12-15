@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hello world</title>
+  <title>红纸</title>
   
   <link href="/atom.xml" rel="self"/>
   
@@ -66,7 +66,7 @@
     <link href="http://www.zhz.io/2016/08/25/Shared%20Keychain%20Access/"/>
     <id>http://www.zhz.io/2016/08/25/Shared Keychain Access/</id>
     <published>2016-08-25T08:57:23.000Z</published>
-    <updated>2016-12-15T09:02:46.000Z</updated>
+    <updated>2016-12-15T10:04:43.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-什么是Keychain"><a href="#0x00-什么是Keychain" class="headerlink" title="0x00 什么是Keychain"></a>0x00 什么是Keychain</h2><p>据介绍，Keychain是iOS系统官方提供的安全存储容器，我们可以用它来存一些敏感信息，EG:密码，用户名，证书等等。<br>Mac电脑上自带的Keychain Access.app就是苹果自己的Keychain读取软件。<br>Keychain是保存在沙盒之外的数据库的，所以在删除App后，在重新下载App后，这些信息依旧存在，并且你可以通过设置一些属性，让你的数据保#####存到iCloud中，达到跨设备存储。</p>
 <h2 id="0x01-Keychain本质是什么"><a href="#0x01-Keychain本质是什么" class="headerlink" title="0x01 Keychain本质是什么"></a>0x01 Keychain本质是什么</h2><p>Keychain存储本质是Sqlite。真机地址：/private/var/Keychains/keychain-2.db<br>既然是Sqlite，那么Keychain存储的对象（后面统称为Item），即对应Sqlite上的一条记录而已。</p>
@@ -174,7 +174,6 @@
 </blockquote>
 <h2 id="0xfe-总结"><a href="#0xfe-总结" class="headerlink" title="0xfe 总结"></a>0xfe 总结</h2><p>Keychain很方便，支持App间，设备间数据的传输，为一大群开发者解决了一堆的难题，但是也不能过度依赖于这个东西。Keychain的读取速度是NSUserDefault的3倍时长左右。一些简单的数据存储在Info.plist或者NSUserdefault中反而会更好。</p>
 <h2 id="0xff-参考链接"><a href="#0xff-参考链接" class="headerlink" title="0xff 参考链接"></a>0xff 参考链接</h2><p><a href="https://developer.apple.com/videos/play/wwdc2013/709/" target="_blank" rel="external">2013届WWDC Keychain简介</a><br><a href="http://blog.sheliw.com/blog/2015/02/16/keychain/" target="_blank" rel="external">Max Blog Keychain</a></p>
-<p>∑∑</p>
 ]]></content>
     
     <summary type="html">
