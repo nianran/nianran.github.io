@@ -1,0 +1,71 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Share Keychain Access · Hello world</title><meta name="description" content="Share Keychain Access - HongZhi"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://www.zhz.io/atom.xml" title="Hello world"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/nianran" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">Share Keychain Access</h1><div class="post-info">Aug 25, 2016</div><div class="post-content"><h2 id="0x00-什么是Keychain"><a href="#0x00-什么是Keychain" class="headerlink" title="0x00 什么是Keychain"></a>0x00 什么是Keychain</h2><p>据介绍，Keychain是iOS系统官方提供的安全存储容器，我们可以用它来存一些敏感信息，EG:密码，用户名，证书等等。<br>Mac电脑上自带的Keychain Access.app就是苹果自己的Keychain读取软件。<br>Keychain是保存在沙盒之外的数据库的，所以在删除App后，在重新下载App后，这些信息依旧存在，并且你可以通过设置一些属性，让你的数据保#####存到iCloud中，达到跨设备存储。</p>
+<h2 id="0x01-Keychain本质是什么"><a href="#0x01-Keychain本质是什么" class="headerlink" title="0x01 Keychain本质是什么"></a>0x01 Keychain本质是什么</h2><p>Keychain存储本质是Sqlite。真机地址：/private/var/Keychains/keychain-2.db<br>既然是Sqlite，那么Keychain存储的对象（后面统称为Item），即对应Sqlite上的一条记录而已。</p>
+<h2 id="0x02-Item"><a href="#0x02-Item" class="headerlink" title="0x02 Item"></a>0x02 Item</h2><p>Item 结构</p>
+<ul>
+<li>Class -&gt; kSecClass //指向对应的表结构</li>
+<li>Attributes -&gt; kSecAttrXXXX //每个表中对应的字段</li>
+<li>Value -&gt; kSecValueXXX //存储的类型</li>
+</ul>
+<p>Class<br>有Sqlite，那么就会有对应的表。<br>Item在保存对象的时候，你需要指定你要保存的表。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="built_in">CFStringRef</span> kSecClassGenericPassword    <span class="comment">//一般的密码存储表，基本用这个为主，对应genp表</span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="built_in">CFStringRef</span> kSecClassInternetPassword      <span class="comment">//用来存储网络密码的表，对应inet表</span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="built_in">CFStringRef</span> kSecClassCertificate        <span class="comment">//用来存储证书表，对应cert表</span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="built_in">CFStringRef</span> kSecClassKey             <span class="comment">//存一些Key之类的东西，对应keys表</span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="built_in">CFStringRef</span> kSecClassIdentity              <span class="comment">//一些特殊的认证信息之类的，这个不知道。</span></div></pre></td></tr></table></figure>
+<p>Attributes<br>关于Item的属性，对应的不同表是不同的。每个都介绍不现实，讲讲最常用的kSecClassGenericPassword表中的一些字段吧</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>Value值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kSecAttrAccessible</td>
+<td>kSecAttrAccessibleWhenUnlocked （Default）</td>
+<td>你能获取到Keychain的数据必须在设备被解锁的情况下获取</td>
+</tr>
+<tr>
+<td></td>
+<td>kSecAttrAccessibleAfterFirstUnlock</td>
+<td>Keychain的数据在设备第一次解锁之后就能够获取使用</td>
+</tr>
+<tr>
+<td></td>
+<td>kSecAttrAccessibleAlways</td>
+<td>Keychain数据始终可以获取到</td>
+</tr>
+<tr>
+<td>kSecAttrAccessGroup</td>
+<td>自定义Like（@”AppIdentifierPrefix.com.hongzhi.test”）</td>
+<td>设置你的存储区域，后面会详细讲</td>
+</tr>
+<tr>
+<td>kSecAttrAccount</td>
+<td>自定义</td>
+<td>标识此条数据的主Key之一</td>
+</tr>
+<tr>
+<td>kSecAttrService</td>
+<td>自定义</td>
+<td>标识此条数据的主Key之一</td>
+</tr>
+<tr>
+<td>kSecAttrGeneric</td>
+<td>自定义</td>
+<td>非主键用来标识</td>
+</tr>
+<tr>
+<td>kSecAttrSynchronizable</td>
+<td>BOOL</td>
+<td>标识是否同步到iCloud</td>
+</tr>
+</tbody>
+</table>
+</div></article></div></section><footer><div class="paginator"></div><div id="disqus_thread"></div><script>var disqus_shortname = 'zhz';
+var disqus_identifier = '2016/08/25/Access/';
+var disqus_title = 'Share Keychain Access';
+var disqus_url = 'http://www.zhz.io/2016/08/25/Access/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//zhz.disqus.com/count.js" async></script><div class="copyright"><p>© 2016 <a href="http://www.zhz.io">HongZhi</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-82278125-1",'auto');ga('send','pageview');</script></body></html>

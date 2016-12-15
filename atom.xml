@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hello world</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.zhz.io/"/>
+  <updated>2016-12-15T08:15:03.000Z</updated>
+  <id>http://www.zhz.io/</id>
+  
+  <author>
+    <name>HongZhi</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Share Keychain Access</title>
+    <link href="http://www.zhz.io/2016/08/25/Access/"/>
+    <id>http://www.zhz.io/2016/08/25/Access/</id>
+    <published>2016-08-25T08:13:34.000Z</published>
+    <updated>2016-12-15T08:15:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-什么是Keychain"><a href="#0x00-什么是Keychain" class="headerlink" title="0x00 什么是Keychain"></a>0x00 什么是Keychain</h2><p>据介绍，Keychain是iOS系统官方提供的安全存储容器，我们可以用它来存一些敏感信息，EG:密码，用户名，证书等等。<br>Mac电脑上自带的Keychain Access.app就是苹果自己的Keychain读取软件。<br>Keychain是保存在沙盒之外的数据库的，所以在删除App后，在重新下载App后，这些信息依旧存在，并且你可以通过设置一些属性，让你的数据保#####存到iCloud中，达到跨设备存储。</p>
+<h2 id="0x01-Keychain本质是什么"><a href="#0x01-Keychain本质是什么" class="headerlink" title="0x01 Keychain本质是什么"></a>0x01 Keychain本质是什么</h2><p>Keychain存储本质是Sqlite。真机地址：/private/var/Keychains/keychain-2.db<br>既然是Sqlite，那么Keychain存储的对象（后面统称为Item），即对应Sqlite上的一条记录而已。</p>
+<h2 id="0x02-Item"><a href="#0x02-Item" class="headerlink" title="0x02 Item"></a>0x02 Item</h2><p>Item 结构</p>
+<ul>
+<li>Class -&gt; kSecClass //指向对应的表结构</li>
+<li>Attributes -&gt; kSecAttrXXXX //每个表中对应的字段</li>
+<li>Value -&gt; kSecValueXXX //存储的类型</li>
+</ul>
+<p>Class<br>有Sqlite，那么就会有对应的表。<br>Item在保存对象的时候，你需要指定你要保存的表。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="built_in">CFStringRef</span> kSecClassGenericPassword    <span class="comment">//一般的密码存储表，基本用这个为主，对应genp表</span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="built_in">CFStringRef</span> kSecClassInternetPassword      <span class="comment">//用来存储网络密码的表，对应inet表</span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="built_in">CFStringRef</span> kSecClassCertificate        <span class="comment">//用来存储证书表，对应cert表</span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="built_in">CFStringRef</span> kSecClassKey             <span class="comment">//存一些Key之类的东西，对应keys表</span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="built_in">CFStringRef</span> kSecClassIdentity              <span class="comment">//一些特殊的认证信息之类的，这个不知道。</span></div></pre></td></tr></table></figure>
+<p>Attributes<br>关于Item的属性，对应的不同表是不同的。每个都介绍不现实，讲讲最常用的kSecClassGenericPassword表中的一些字段吧</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>Value值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kSecAttrAccessible</td>
+<td>kSecAttrAccessibleWhenUnlocked （Default）</td>
+<td>你能获取到Keychain的数据必须在设备被解锁的情况下获取</td>
+</tr>
+<tr>
+<td></td>
+<td>kSecAttrAccessibleAfterFirstUnlock</td>
+<td>Keychain的数据在设备第一次解锁之后就能够获取使用</td>
+</tr>
+<tr>
+<td></td>
+<td>kSecAttrAccessibleAlways</td>
+<td>Keychain数据始终可以获取到</td>
+</tr>
+<tr>
+<td>kSecAttrAccessGroup</td>
+<td>自定义Like（@”AppIdentifierPrefix.com.hongzhi.test”）</td>
+<td>设置你的存储区域，后面会详细讲</td>
+</tr>
+<tr>
+<td>kSecAttrAccount</td>
+<td>自定义</td>
+<td>标识此条数据的主Key之一</td>
+</tr>
+<tr>
+<td>kSecAttrService</td>
+<td>自定义</td>
+<td>标识此条数据的主Key之一</td>
+</tr>
+<tr>
+<td>kSecAttrGeneric</td>
+<td>自定义</td>
+<td>非主键用来标识</td>
+</tr>
+<tr>
+<td>kSecAttrSynchronizable</td>
+<td>BOOL</td>
+<td>标识是否同步到iCloud</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-什么是Keychain&quot;&gt;&lt;a href=&quot;#0x00-什么是Keychain&quot; class=&quot;headerlink&quot; title=&quot;0x00 什么是Keychain&quot;&gt;&lt;/a&gt;0x00 什么是Keychain&lt;/h2&gt;&lt;p&gt;据介绍，Keychain是i
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://www.zhz.io/tags/iOS/"/>
+    
+  </entry>
+  
+</feed>
