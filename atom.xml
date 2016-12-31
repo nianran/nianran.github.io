@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.zhz.io/"/>
-  <updated>2016-12-15T09:01:08.000Z</updated>
+  <updated>2016-12-31T04:46:45.000Z</updated>
   <id>http://www.zhz.io/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我的2016年总结</title>
+    <link href="http://www.zhz.io/2016/12/31/%E6%88%91%E7%9A%842016%E5%B9%B4%E6%80%BB%E7%BB%93/"/>
+    <id>http://www.zhz.io/2016/12/31/我的2016年总结/</id>
+    <published>2016-12-31T04:44:36.000Z</published>
+    <updated>2016-12-31T04:46:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>呵呵哒，这好像是我第一次写这种总结（非逼迫性），来记录一下今年我都干了写啥蠢事。<br>OK~2016年，就这样过去了，这几天看了几个小伙伴和一些人的博客，套用下模板吧。The Good The Bad</p>
+<h2 id="0x01-The-Good"><a href="#0x01-The-Good" class="headerlink" title="0x01 The Good"></a>0x01 The Good</h2><p>今年顺利毕业了，算是度过了人生中最后一段学校的时光。<br>今年的变化还是挺多的吧，单从职业上来说，从学生变成了从业者。从生活上来说，从一个满受父母关怀的孩子变成了一个独立者。</p>
+<h2 id="看了挺多的书"><a href="#看了挺多的书" class="headerlink" title="看了挺多的书"></a>看了挺多的书</h2><p>今年看了挺多的书吧，比如说CA、OC编程之道、Effective Objective-C、代码之外的生存指南等等。收益良多，了解了更多iOS底层的东西，对于后续帮助的确挺大的。</p>
+<a id="more"></a>
+<h2 id="从业务转向组件"><a href="#从业务转向组件" class="headerlink" title="从业务转向组件"></a>从业务转向组件</h2><p>来到了一家1K以上规模的公司，终于可以开始不用写一些业务上面的代码了，对于我来说，感觉业务的代码比较繁琐，因为平时的工作量比较多，所以想研究一些东西变成了不可能。<br>现在有所好转，可以开始重构一些模块，开始做一些模块化的东西，接触一些之前会接触不到的东西。慢慢的开始优化自己的代码，因为我写的并不是只有我一个人用，而是面向整个团队。</p>
+<h2 id="提升工作效率的方法并不是加班"><a href="#提升工作效率的方法并不是加班" class="headerlink" title="提升工作效率的方法并不是加班"></a>提升工作效率的方法并不是加班</h2><p>有段时间，曾经强迫自己每天晚上一定要加班，把自己搞的累死累活的，重复着一样的工作。然而并没有什么很好的进展，工作完成量和时间成了一次性方程直线。<br>在做自动化静态库构建的时候，刚开始并没有完整的理解Ruby语言的魅力，导致自己走了很多的弯路，而且少了错过了很多更加有效的方案方法。</p>
+<h2 id="当下能做的为什么要拖到明天"><a href="#当下能做的为什么要拖到明天" class="headerlink" title="当下能做的为什么要拖到明天"></a>当下能做的为什么要拖到明天</h2><p>这应该算一个方法的转变吧，我觉得我是一个很懒的人，所以一直都是这件事情明天做吧，那就放到明天好了。当时这个明天就永远变成了明天。这是我不愿意看到的，所以开始慢慢的调整自己的习惯。从小事做起吧，比如说，洗衣机的衣服洗好了，那就马上去晒掉，不丢到明天。</p>
+<h2 id="1年-1年？"><a href="#1年-1年？" class="headerlink" title="1年=1年？"></a>1年=1年？</h2><p>在技术圈子里时不时就会听到这句话，“技术无时无刻都在变化，你永远都不知道下一秒变成了什么”。我听到了另外一句话，“你的一年是几年”，你是每天重复着一样的工作，还是说你无时无刻都在学习。</p>
+<h2 id="0x02-The-Bad"><a href="#0x02-The-Bad" class="headerlink" title="0x02 The Bad"></a>0x02 The Bad</h2><h2 id="年初定下的一些目标并没有实现"><a href="#年初定下的一些目标并没有实现" class="headerlink" title="年初定下的一些目标并没有实现"></a>年初定下的一些目标并没有实现</h2><p>关于年初定了一堆的目标，被遗忘了好多了。呵呵哒。其中有个减肥的好像被遗忘的特别严重吧。去年狠下心减了那么多，今年弹了一部分。<br>改进：可能要实行一些GTD的方案，来规划一下后面走的路。</p>
+<h2 id="认识的人太少了"><a href="#认识的人太少了" class="headerlink" title="认识的人太少了"></a>认识的人太少了</h2><p>不知道是不是因为工作了的关系，开始认识的人越来越少，自己的圈子被局限了起来。一些交流会感觉无意义就被略过了，或者已没时间为借口匆匆的避开了一系列聚会。和朋友之间呆的时间也开始变少了。或者说知心朋友应该是越来越少了吧。<br>改进：多参加一些技术交流会吧，即使不是技术的。</p>
+<h2 id="其他领域的知识狩猎太少了"><a href="#其他领域的知识狩猎太少了" class="headerlink" title="其他领域的知识狩猎太少了"></a>其他领域的知识狩猎太少了</h2><p>今年一股脑门的投入在iOS圈子里面，对于其他的技术了解的太少了，还好最后一个月，在写一些脚本构建方面的东西，从而能够学习到一些Shell和Ruby。不然真的要被OC给玩死了，到头来一点意思都没有。几年都不加语言特性（呵呵哒）。<br>改进：应该会对一些其他领域进行研究，特别是安全方面的。</p>
+<h2 id="重构上测试写太少了"><a href="#重构上测试写太少了" class="headerlink" title="重构上测试写太少了"></a>重构上测试写太少了</h2><p>最后几个月重构了一些东西，但是呢出了线上Bug，原因都很简单，都是几分钟内解决的小Bug，而且一些测试明显就能够测试出来。哎~只能说自己重构前没有写测试吧。导致自己犯了一些很低级的错误。<br>改进：以后重构的时候前写好单元测试和功能测试吧。</p>
+<h2 id="0x03-2017-一些计划"><a href="#0x03-2017-一些计划" class="headerlink" title="0x03 2017 一些计划"></a>0x03 2017 一些计划</h2><ol>
+<li>明确自己的人生目标（应该是阶段性的目标）</li>
+<li>去一次日本</li>
+<li>改变自己</li>
+<li>能够从容的应对各种事情</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;呵呵哒，这好像是我第一次写这种总结（非逼迫性），来记录一下今年我都干了写啥蠢事。&lt;br&gt;OK~2016年，就这样过去了，这几天看了几个小伙伴和一些人的博客，套用下模板吧。The Good The Bad&lt;/p&gt;
+&lt;h2 id=&quot;0x01-The-Good&quot;&gt;&lt;a href=&quot;#0x01-The-Good&quot; class=&quot;headerlink&quot; title=&quot;0x01 The Good&quot;&gt;&lt;/a&gt;0x01 The Good&lt;/h2&gt;&lt;p&gt;今年顺利毕业了，算是度过了人生中最后一段学校的时光。&lt;br&gt;今年的变化还是挺多的吧，单从职业上来说，从学生变成了从业者。从生活上来说，从一个满受父母关怀的孩子变成了一个独立者。&lt;/p&gt;
+&lt;h2 id=&quot;看了挺多的书&quot;&gt;&lt;a href=&quot;#看了挺多的书&quot; class=&quot;headerlink&quot; title=&quot;看了挺多的书&quot;&gt;&lt;/a&gt;看了挺多的书&lt;/h2&gt;&lt;p&gt;今年看了挺多的书吧，比如说CA、OC编程之道、Effective Objective-C、代码之外的生存指南等等。收益良多，了解了更多iOS底层的东西，对于后续帮助的确挺大的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="总结" scheme="http://www.zhz.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>Cocoapods常用命令</title>
