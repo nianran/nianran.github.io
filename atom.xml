@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.zhz.io/"/>
-  <updated>2016-12-31T04:46:45.000Z</updated>
+  <updated>2017-06-05T13:56:33.000Z</updated>
   <id>http://www.zhz.io/</id>
   
   <author>
@@ -14,6 +14,93 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Advanced_Apple_Debugging阅读笔记Part1</title>
+    <link href="http://www.zhz.io/2017/06/05/Advanced-Apple-Debugging%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0Part1/"/>
+    <id>http://www.zhz.io/2017/06/05/Advanced-Apple-Debugging阅读笔记Part1/</id>
+    <published>2017-06-05T13:54:27.000Z</published>
+    <updated>2017-06-05T13:56:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为<a href="https://store.raywenderlich.com/products/advanced-apple-debugging-and-reverse-engineering" target="_blank" rel="external">Advanced Apple Debugging &amp; Reverse Engineering</a>的第一章<a href="https://store.raywenderlich.com/products/advanced-apple-debugging-and-reverse-engineering阅读笔记，" target="_blank" rel="external">https://store.raywenderlich.com/products/advanced-apple-debugging-and-reverse-engineering阅读笔记，</a><br>有不正之处望指正</p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>关闭Rootless模式</p>
+<ul>
+<li>重启电脑，启动后长按Commond+R</li>
+<li>进入控制台</li>
+<li>输入 csrutil disable; reboot</li>
+<li>不久后就会重启电脑</li>
+</ul>
+<h3 id="File"><a href="#File" class="headerlink" title="File"></a>File</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ lldb /Projects/Sketch/build/Debug/Sketch.app </div><div class="line">&gt;&gt; Current executable set to &apos;/Projects/Sketch/build/Debug/Sketch.app&apos; (x86_64)</div></pre></td></tr></table></figure>
+<p>等同于<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ lldb </div><div class="line">(lldb) file /Projects/Sketch/build/Debug/Sketch.app </div><div class="line">&gt;&gt; Current executable set to &apos;/Projects/Sketch/build/Debug/Sketch.app&apos; (x86_64).</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h3 id="process"><a href="#process" class="headerlink" title="process"></a>process</h3><ul>
+<li>launch 启动执行目录的程序</li>
+</ul>
+<h3 id="image"><a href="#image" class="headerlink" title="image"></a>image</h3><ul>
+<li><p>lookup </p>
+<ul>
+<li><p>-n NAME 查找具体代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(lldb) image lookup -n &quot;-[UIViewController viewDidLoad]&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>-rn NAME 查找所有符合NAME规则的符号。符号可以正则，所以说符合规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">(lldb) image lookup -rn test</div><div class="line">#Swift</div><div class="line">(lldb) image lookup -rn Signals.SwiftTestClass.name.setter </div><div class="line">2 matches found in /Users/derekselander/Library/Developer/Xcode/DerivedData/Signals-bqrjxlceauwfuihjesxmgfodimef/Build/Products/Debug-iphonesimulator/Signals.app/Signals:</div><div class="line">      Address: Signals[0x000000010000aba0] (Signals.__TEXT.__text +38704)</div><div class="line">      Summary: Signals`@objc Signals.SwiftTestClass.name.setter :raywenderlich.com 47</div><div class="line">      Advanced Apple Debugging Chapter 4: Stopping in Code Swift.ImplicitlyUnwrappedOptional&lt;Swift.String&gt; at SwiftTestClass.swift</div><div class="line">      Address: Signals[0x000000010000ac60] (Signals.__TEXT.__text + 38896)</div><div class="line">      Summary: Signals`Signals.SwiftTestClass.name.setter :Swift.ImplicitlyUnwrappedOptional&lt;Swift.String&gt; at SwiftTestClass.swift</div><div class="line">#Mark 一下这边出现了两个，是因为这个工程既有Swift代码也有OC代码，苹果为了做桥接加了第一个后续可以无视</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Breakpoint"><a href="#Breakpoint" class="headerlink" title="Breakpoint"></a>Breakpoint</h3><ul>
+<li><p>设置断点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// 简写的形式</div><div class="line">(lldb) b -[UIViewController viewDidLoad]</div><div class="line"> Breakpoint 1: where = UIKit`-[UIViewController viewDidLoad], address = 0x0000000102bbd788</div><div class="line">//如果想在某个文件中的某行设置一个断点，可使用以下命令：</div><div class="line">(lldb) breakpoint set --file foo.c --line 12</div><div class="line">//如果想给某个函数设置断点，可使用以下命令：</div><div class="line">(lldb) breakpoint set --name foo</div><div class="line">//如果想给C++中所有命名为foo的方法设置断点，可以使用以下命令：</div><div class="line">(lldb) breakpoint set --method foo</div><div class="line"></div><div class="line"># 下面两者等价</div><div class="line">(lldb) b Breakpoints.SwiftTestClass.name.setter :Swift.ImplicitlyUnwrappedOptional&lt;Swift.String&gt;</div><div class="line">(lldb) rb SwiftTestClass.name.setter</div><div class="line"></div><div class="line"># 部分正则参考</div><div class="line">(lldb) rb name\.setter // image lookup后给所有匹配上name.setter的打上断点</div><div class="line">(lldb) rb &apos;\-\[UIViewController\ &apos; // 给这个类的所有方法打上断点</div><div class="line">(lldb) rb &apos;\-\[UIViewController(\(\w+\))?\ &apos;  // 给这个类的所有Category打上断点(没有验证)</div><div class="line">(lldb) rb . -f DetailViewController.swift // 给这个文件内的所有方法打上断点</div><div class="line">(lldb) rb . //给所有的方法打上断点 很危险</div><div class="line">(lldb) rb . -s UIKit // 只断点UIKit库里面的所有方法</div><div class="line"></div><div class="line"># 特殊用法</div><div class="line">^(@).* 这个需要考证是用来屏蔽上面说的桥接问题</div></pre></td></tr></table></figure>
+</li>
+<li><p>其他操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">  # 断点列表</div><div class="line">  (lldb) breakpoint list 1</div><div class="line">  1: name = &apos;main&apos;, locations = 20, resolved = 20, hit count = 0</div><div class="line">1.1: where = Breakpoints`main + 22 at AppDelegate.swift:12, address =0x00000001057676e6, resolved, hit count = 0</div><div class="line">1.2: where = Foundation`-[NSThread main], address = 0x000000010584d182,resolved, hit count = 0</div><div class="line">1.3: where = Foundation`-[NSBlockOperation main], address =0x000000010585df4a, resolved, hit count = 0</div><div class="line">...</div><div class="line"></div><div class="line">  # 断点删除</div><div class="line">  (lldb) breakpoint delete 1</div><div class="line">  (lldb) breakpoint delete 1.1 这个准确的说是disable并不是真正意义上的删除</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Expression-amp-po-amp-p"><a href="#Expression-amp-po-amp-p" class="headerlink" title="Expression &amp; po &amp; p"></a>Expression &amp; po &amp; p</h3><p>po =  expression -O –</p>
+<p>Note: lldb的Context的问题，如果当前代码是在OC下的话要用OC语法，如果是在Swift的环境下要用Swift代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># Swift环境下</div><div class="line">(lldb) po [UIApplication sharedApplication] # 不能这么使用</div><div class="line">(lldb) expression -l objc -O -- [UIApplication sharedApplication]</div><div class="line">(lldb) po UIApplication.shared </div><div class="line"></div><div class="line"># OC环境下</div><div class="line">(lldb) po $R0.title</div><div class="line">(lldb) expression -l swift -- $R0.title</div></pre></td></tr></table></figure></p>
+<p>创建实例的时候要在实例名字前面加$符号，不然不能够正常使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 反例</div><div class="line">(lldb) po id test = [NSObject new]</div><div class="line">(lldb) po test</div><div class="line">error: use of undeclared identifier &apos;test&apos;</div><div class="line"></div><div class="line"># 正确用法</div><div class="line">(lldb) po id $test = [NSObject new]</div><div class="line">(lldb) po $test</div><div class="line">&lt;NSObject: 0x60000001d190&gt;</div><div class="line">(lldb) expression -l swift -O -- $test</div></pre></td></tr></table></figure></p>
+<p>细节：在用Expression调用方法的时候，设置的Breakpoint是不会被主动触发的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 不会被触发</div><div class="line">(lldb) expression -l swift -O -- $R0.viewDidLoad()</div><div class="line"># 会被触发</div><div class="line">(lldb) expression -l swift -O -i 0 -- $R0.viewDidLoad()</div></pre></td></tr></table></figure></p>
+<h3 id="Thread-Frame-amp-Step"><a href="#Thread-Frame-amp-Step" class="headerlink" title="Thread, Frame &amp; Step"></a>Thread, Frame &amp; Step</h3><ul>
+<li><p>Thread &amp; Frame</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> # 打印当前栈内情况</div><div class="line">(lldb) thread backtrace</div><div class="line"> # 打印栈顶信息</div><div class="line">(lldb) frame info</div><div class="line">frame #0: 0x00000001075d0ae0 Signals`MasterViewController.viewWillAppear(animated=&lt;invalid&gt; (0xd1),self=0x00007fff5862dac0) -&gt; () at MasterViewController.swift:47</div><div class="line"> # 根据数据选择栈</div><div class="line"> (lldb) frame select 1</div><div class="line"> # 打印当前所在栈块内的实例</div><div class="line"> (lldb) frame variable</div><div class="line"> # 打印self 符号的所有实例</div><div class="line"> (lldb) frame variable -F self</div></pre></td></tr></table></figure>
+</li>
+<li><p>Step</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 重新启动程序</div><div class="line">(lldb) run</div><div class="line"># 继续</div><div class="line">(lldb) continue</div><div class="line"># 断点下一步 step over</div><div class="line">(lldb) next</div><div class="line"># 进入函数下一步 step into</div><div class="line">(lldb) step</div><div class="line"># 跳出当前函数 step out</div><div class="line">(lldb) finish</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="TypeFormat"><a href="#TypeFormat" class="headerlink" title="TypeFormat"></a>TypeFormat</h3><p><a href="https://sourceware.org/gdb/ onlinedocs/gdb/Output-Formats.html" target="_blank" rel="external">参考链接</a></p>
+<h3 id="Customizing-Commands"><a href="#Customizing-Commands" class="headerlink" title="Customizing Commands"></a>Customizing Commands</h3><ol>
+<li>LLDB支持自定义命令行操作 (著名的chisel就是使用这种方法进行编写的)。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 这个命令相比大家都不陌生，是用来打印当前的视图结构的</div><div class="line">(lldb) po [[[[[UIApplication sharedApplication] keyWindow] rootViewController] view] recursiveDescription]</div><div class="line"></div><div class="line"># 自定义命令(运行时替换)</div><div class="line"># Note：如果想全局替换可以把这个写入~/.lldbinit里面即可</div><div class="line">(lldb) command alias -- Yay_Autolayout expression -l objc -O -- [[[[[UIApplication sharedApplication] keyWindow] rootViewController] view] recursiveDescription]</div><div class="line"></div><div class="line"># 下面的调用等价于第一个</div><div class="line">(lldb) Yay_Autolayout</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="正则表达"><a href="#正则表达" class="headerlink" title="正则表达"></a>正则表达</h3><ul>
+<li>LLDB的正则实现原理是基于Shell的SED命令，详细可以参考sed命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(lldb) command regex rlook &apos;s/(.+)/image lookup -rn %1/&apos;</div><div class="line">(lldb) rlook viewDidLoad</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="简写"><a href="#简写" class="headerlink" title="简写"></a>简写</h3><p>c = continue<br>ex = expression<br>b = breakpoint<br>n = next</p>
+<h3 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h3><ul>
+<li>$ ttys //查找当前终端的名称<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">~ $ tty</div><div class="line">&gt;&gt;  /dev/ttys027</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;本文为&lt;a href=&quot;https://store.raywenderlich.com/products/advanced-apple-debugging-and-reverse-engineering&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Advanced Apple Debugging &amp;amp; Reverse Engineering&lt;/a&gt;的第一章&lt;a href=&quot;https://store.raywenderlich.com/products/advanced-apple-debugging-and-reverse-engineering阅读笔记，&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://store.raywenderlich.com/products/advanced-apple-debugging-and-reverse-engineering阅读笔记，&lt;/a&gt;&lt;br&gt;有不正之处望指正&lt;/p&gt;
+&lt;h2 id=&quot;基础&quot;&gt;&lt;a href=&quot;#基础&quot; class=&quot;headerlink&quot; title=&quot;基础&quot;&gt;&lt;/a&gt;基础&lt;/h2&gt;&lt;p&gt;关闭Rootless模式&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;重启电脑，启动后长按Commond+R&lt;/li&gt;
+&lt;li&gt;进入控制台&lt;/li&gt;
+&lt;li&gt;输入 csrutil disable; reboot&lt;/li&gt;
+&lt;li&gt;不久后就会重启电脑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;File&quot;&gt;&lt;a href=&quot;#File&quot; class=&quot;headerlink&quot; title=&quot;File&quot;&gt;&lt;/a&gt;File&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ lldb /Projects/Sketch/build/Debug/Sketch.app &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;gt;&amp;gt; Current executable set to &amp;apos;/Projects/Sketch/build/Debug/Sketch.app&amp;apos; (x86_64)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;等同于&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ lldb &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;(lldb) file /Projects/Sketch/build/Debug/Sketch.app &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;gt;&amp;gt; Current executable set to &amp;apos;/Projects/Sketch/build/Debug/Sketch.app&amp;apos; (x86_64).&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>我的2016年总结</title>
