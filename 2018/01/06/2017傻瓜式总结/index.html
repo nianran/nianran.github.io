@@ -1,0 +1,47 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 2017傻瓜式总结 · 红纸</title><meta name="description" content="2017傻瓜式总结 - HongZhi"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://www.zhz.io/atom.xml" title="红纸"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/nianran" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">2017傻瓜式总结</h1><div class="post-info">Jan 6, 2018</div><div class="post-content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>OK~工作一年了哈，博客一直没有管，组内事情太多（借口，太懒），虽然写了一堆的文章，但是基本上都是在组内发布了。对外么，部分受限于公司协议之类的，部分是暂时觉得水平有限（反正也没什么人看么）。</p>
+<h2 id="回顾2016年立的Flag-amp-Bad"><a href="#回顾2016年立的Flag-amp-Bad" class="headerlink" title="回顾2016年立的Flag &amp; Bad"></a>回顾2016年立的Flag &amp; Bad</h2><ul>
+<li>明确自己的人生目标<br>在这一点上，应该考虑了很久才对，但是一直没有给自己一个明确的答案。<br>但是应该有了一系列的目标。<ol>
+<li>财务自由？不不不，精神自由。在40岁以后能够达到精神自由，不再受限于生活中的种种因素的干扰。毕竟精神自由取决于个人，我觉得我是一个比较感性的人，钱虽然是越多越好，但是钱么，我觉得够用就好。过上舒舒服服的小日子。但是在此之前就必须要好好努力才可以</li>
+<li>在技术上有所突破，为后来人留下一些真正有用的东西，再者是提高一些知名度。2018，一个月至少一篇以上有含量的技术分享，为之努力吧，也只能这么说一说了。</li>
+</ol>
+</li>
+<li>去一次日本<br>没去，其他地方倒是去了好几个，对我个人来说也是很棒的体验。</li>
+<li>能够从容的应对各种事情<br>在这个方面，我觉得个人做的还可以，练就了’Pocker Face’，只不过还有待加强心理承受能力吧，主要还是靠这个，心理承受能力好了才行。不然应对一些事情的时候，会不知所措。</li>
+</ul>
+<a id="more"></a>
+<h2 id="无痕埋点-amp-AOP"><a href="#无痕埋点-amp-AOP" class="headerlink" title="无痕埋点 &amp; AOP"></a>无痕埋点 &amp; AOP</h2><p>做好了，但是产品没有启用（怪我咯？）。17年年初的时候，一直都在做这方面的事情，研究各种大公司的方案，终于耗时3个月的修修整整，出了一个完整的方案，但是埋点组说维护成本太大了（项目启动时候，已经明确提出说维护成本会很大，大致分支成本出处，与最后一致。）。哎，不说这些伤心事，虽然没有启用，但是对于我个人而言还是有很大的收获的，例如AOP相关把Aspects完全给弄完了一遍，梳理了行业内的所有无痕埋点的方案。基本每个方案都进行了一个尝试，留下了很多产物，对于自己有了一个很大的帮助。从中的Aspects库后来改了改，也用到了AOP埋点上，也算是有所收获吧。</p>
+<h2 id="组件化静态库切换"><a href="#组件化静态库切换" class="headerlink" title="组件化静态库切换"></a>组件化静态库切换</h2><p>由于组内的调整，原先的组件化静态库切换方案也逐渐开始有了一些变化，从原先的利用’s.prepare_command’命令，到现在的利用:http/:git的切换。利用Cocoapods的Config单例也达到了清理缓存的功能，达到业务人员无感知的情况下清理缓存，从而进行切换工作，但是这个方案可能会局限于tag的情况，在其他分支下的情况可能会有所不同。应该会需要另外的一些调整。毕竟现在做的静态库的SHA校验也没有做。</p>
+<p>盘点一下已经做好的功能</p>
+<ul>
+<li>源码和静态库完全独立管理（后期如果没有源码权限的同学访问，会直接指向静态库）</li>
+<li>podspec无需配置任何东西，一切都在上传tag版本的时候进行需要绑定</li>
+<li>使用s.source替换原先的s.prepare_command的下载方式，让使用上更加原生pod化</li>
+<li>做了一个Ruby Gem专门来打包静态库（原先的Shell被废弃掉了，不好维护）</li>
+<li>打包好的静态库暴露出特殊源文件（哇这个遇到了好多坑，比如说dummny文件，日乐购）</li>
+<li>完整的子项目打包静态库分包</li>
+<li>异步打包静态库，达到单机子多个Runner在跑也不会出问题。（目标是多机子）</li>
+</ul>
+<p>盘点一下2018年组件化静态库切换要做的</p>
+<ul>
+<li>ZIP文件的SHA校验（这个会对分支打包有帮助，但是还没完全研究）</li>
+<li>打包系统监控（主要公司的gitlab一直不升级，拖慢了这个）</li>
+<li>GEM提交代码后，自动化进行测试。（17年写脚本的时候，最痛苦的就是测试，一个个测试过去，手动的。。。。:-)）</li>
+<li>分支打包静态库</li>
+</ul>
+<h2 id="投资方面"><a href="#投资方面" class="headerlink" title="投资方面"></a>投资方面</h2><p>emmm，说完了技术相关，来聊一聊投资相关吧，17年对于投资，有亏有赚。最主要的应该还是通过亏损和盈利调整好了心态。<br>16年的钱都在债券基金里面，17年基本都在51吧（保守型投资哈哈，保持年化8%左右哈哈。）。51因为有个朋友在，还是挺信任这家企业的。OK，这些事稳定的投资项目，期间我也稍微拿出几万在其他方面进行了尝试，起初大部分钱在债券基金的时候，有一部分的钱投入到了其他类型基金方向。因为不了解行情，瞎比乱投，导致后来亏损程度超过20%，股市基金深不可测，我决定暂时进行退出，多了解了解股市基金的规则之后再继续进入这个圈子内。<br>17年年末的时候，开始进入币圈。当时是10万左右软妹币的比特币。在local那边交易后，1.1万拿到了差不多0.1个左右的BTC，开始了我的抄币之旅。在经历多次买卖的亏损后，开始逐渐了解了市场行情，不贪就能获利，哈哈。顶峰的时候应该是到了1.6WRMB左右了吧。然后最近BTC开始疯狂大跌，调整了下心态。没有太多操作，放着就放着吧，我还是挺看好这一块的。虽然投的也不多。</p>
+<h2 id="旅游"><a href="#旅游" class="headerlink" title="旅游"></a>旅游</h2><p>去了千岛湖、黄山、哈尔冰（2018年1月份去的，写总结之前去了，也算进去吧），虽然没有达到最开始去日本的目标，但是这几次行程对我来说都特别印象深刻。组织能力真的特别重要，还有适当的提前工作要做。你能想象220公里竟然需要开7个小时左右吗？他们那边的路不是按照100码来算的，有些地方是只能开到30码。瞬间就惊呆了。由于准备的不够充分，亚布力滑雪也没有去。这个倒是非常的遗憾吧。<br>精打细算。去旅游真的要精打细算，鲜明的栗子，我去哈尔冰4天花了3500。我的第一位朋友，哈尔滨/北京。7天的个人游，只花了4300。第二位朋友哈尔滨/漠河/北京，11天，5500，她跟我说她跟他老公的机票都是150块钱的，我瞬间惊呆了。</p>
+<h3 id="对于2018年的展望"><a href="#对于2018年的展望" class="headerlink" title="对于2018年的展望"></a>对于2018年的展望</h3><p>2018，少立点FLAG吧，贵在坚持。</p>
+<ul>
+<li>坚持看书，看完12本书吧，一个月一本。</li>
+<li>提升下英语水平。</li>
+</ul>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>NO PAINS, NO GAINS.  Hello 2018.</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/09/10/晴明视频学习笔记-第二章/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'zhz';
+var disqus_identifier = '2018/01/06/2017傻瓜式总结/';
+var disqus_title = '2017傻瓜式总结';
+var disqus_url = 'http://www.zhz.io/2018/01/06/2017傻瓜式总结/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//zhz.disqus.com/count.js" async></script><div class="copyright"><p>© 2016 - 2018 <a href="http://www.zhz.io">HongZhi</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-82278125-1",'auto');ga('send','pageview');</script></body></html>

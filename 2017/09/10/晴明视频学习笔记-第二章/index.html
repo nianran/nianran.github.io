@@ -1,0 +1,119 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 晴明视频学习笔记 - 第二章 · 红纸</title><meta name="description" content="晴明视频学习笔记 - 第二章 - HongZhi"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://www.zhz.io/atom.xml" title="红纸"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/nianran" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">晴明视频学习笔记 - 第二章</h1><div class="post-info">Sep 10, 2017</div><div class="post-content"><h2 id="原生-Hybird-RN"><a href="#原生-Hybird-RN" class="headerlink" title="原生/Hybird/RN"></a>原生/Hybird/RN</h2><h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><table>
+<thead>
+<tr>
+<th>形式</th>
+<th>介绍</th>
+<th>优势</th>
+<th>劣势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原生</td>
+<td>使用原生语言进行编写开发</td>
+<td>性能好/有生态圈的优势点</td>
+<td>各个平台有各自的语言，学习成本大，不兼容</td>
+</tr>
+<tr>
+<td>Hybrid App混合开发</td>
+<td>使用前段代码，在各个平台上有他的容器WebView，利用他进行渲染</td>
+<td>跨平台，适合简单应用</td>
+<td>性能不是很好 </td>
+</tr>
+<tr>
+<td>RN</td>
+<td>较于前面两者之间，使用JS开发，翻译成原生组件进行展示</td>
+<td>学习成本低，天然跨平台，无审核热更新，具有优秀的社区能力（开源库）</td>
+<td>性能</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h2><p>名词解释：ECMAScript是一种由Ecma国际（前身为欧洲计算机制造商协会,英文名称是European Computer Manufacturers Association）通过ECMA-262标准化的脚本程序设计语言。这种语言在万维网上应用广泛，它往往被称为JavaScript或JScript，但实际上后两者是ECMA-262标准的实现和扩展。</p>
+<p>简单的说：ECMAScript是一种标准文本语法，JS是根据其进行设计的</p>
+<a id="more"></a>
+<h3 id="变量和常量生命"><a href="#变量和常量生命" class="headerlink" title="变量和常量生命"></a>变量和常量生命</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> greeting = <span class="string">'hi'</span>; <span class="comment">// 新式写法，推荐使用</span></div><div class="line"><span class="keyword">var</span> greeting1 = <span class="string">'hi1'</span>;  <span class="comment">//老式写法，不推荐使用</span></div><div class="line"><span class="keyword">const</span> answer = <span class="number">4</span>;</div><div class="line"><span class="comment">// 多个生命简单些发</span></div><div class="line"><span class="keyword">let</span> a = <span class="string">'1'</span>; b = <span class="string">'2'</span>;</div><div class="line"><span class="comment">// 没有声明或者声明后没有赋值的变量值为常量</span></div></pre></td></tr></table></figure>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(a,b) =&gt; a+b;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>class外部：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> 函数名 = <span class="function">(<span class="params">参数</span>) =&gt;</span> &#123; 内部逻辑 &#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>class内部：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    方法名 = <span class="function">(<span class="params">参数</span>) =&gt;</span> &#123;</div><div class="line">    	<span class="comment">// 内部逻辑</span></div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>可能并不是很习惯这种写法，联想方案<br>f(x) = πx^2<br>(x) =&gt; 3.14 <em> x </em> x<br>输入 =&gt; 输出<br>参数 =&gt; 返回表达式</p>
+</blockquote>
+<ul>
+<li>Tips:这里有个坑，如果箭头函数的代码块部分使用了大括号，则此时切莫忘了使用return语句返回：</li>
+<li>() =&gt; 1          // 返回1</li>
+<li>() =&gt; { 1 }         // 返回 undefined</li>
+<li>() =&gt; { return 1; }    // 返回1</li>
+</ul>
+<h3 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h3><p>…扩展运算符好比是把一个压缩包给解压到当前目录<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 数组</span></div><div class="line">    <span class="comment">// 数组</span></div><div class="line">    <span class="keyword">let</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line">    <span class="built_in">console</span>.log(...a) 		    <span class="comment">// 1 2 3 </span></div><div class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>, ...a, <span class="number">5</span>) 	<span class="comment">// 1 1 2 3 5</span></div><div class="line"></div><div class="line">    <span class="comment">// 对象</span></div><div class="line">    <span class="keyword">let</span> z = &#123; <span class="attr">a</span>: <span class="number">3</span>, <span class="attr">b</span>: <span class="number">4</span> &#125;; </div><div class="line">    <span class="keyword">let</span> n = &#123; ...z &#125;; </div><div class="line">    <span class="built_in">console</span>.log(n)		<span class="comment">// &#123; a: 3, b: 4 &#125;</span></div></pre></td></tr></table></figure></p>
+<h3 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h3><p>可以想象成一个语法糖，可以帮助你快速的从对象中获取数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 数组</span></div><div class="line"><span class="keyword">let</span> [a, b, c] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line"><span class="built_in">console</span>.log(a, b, c); 	<span class="comment">//  1 2 3</span></div><div class="line"></div><div class="line"><span class="comment">// 对象</span></div><div class="line"><span class="keyword">var</span> props = &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">data</span>: &#123; <span class="attr">count</span>: <span class="number">3</span>, <span class="attr">price</span>: <span class="number">100</span> &#125; &#125;; </div><div class="line"><span class="comment">// 从props中拿到checked的值和count值</span></div><div class="line"><span class="keyword">var</span> &#123; checked, <span class="attr">data</span>: &#123; count &#125; &#125; = props;	</div><div class="line"><span class="built_in">console</span>.log(checked, count);	<span class="comment">// false  3</span></div></pre></td></tr></table></figure></p>
+<h3 id="数组的新增方法"><a href="#数组的新增方法" class="headerlink" title="数组的新增方法"></a>数组的新增方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 数组查找元素</span></div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].includes(<span class="number">2</span>); 	<span class="comment">// true </span></div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].includes(<span class="number">4</span>); 	<span class="comment">// false</span></div><div class="line"><span class="comment">// 字符串也可用</span></div><div class="line">‘hello’.includes(‘hell’);	<span class="comment">// true</span></div><div class="line"></div><div class="line"><span class="comment">// map返回等长的新数组</span></div><div class="line"><span class="keyword">let</span> odds = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>];</div><div class="line"><span class="keyword">let</span> evens = odds.map(<span class="function"><span class="params">i</span> =&gt;</span> i + <span class="number">1</span>);  <span class="comment">// [2, 4, 6, 8, 10]</span></div><div class="line"></div><div class="line"><span class="comment">// 使用标记技巧</span></div><div class="line"><span class="keyword">let</span> names = [‘tom’, ‘jerry’];</div><div class="line"><span class="keyword">let</span> nameTags = names.map(<span class="function"><span class="params">n</span> =&gt;</span> &lt;Text&gt;&#123;n&#125;&lt;<span class="regexp">/Text&gt;)</span></div></pre></td></tr></table></figure>
+<h3 id="推荐书籍"><a href="#推荐书籍" class="headerlink" title="推荐书籍"></a>推荐书籍</h3><ol>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide" target="_blank" rel="external">MDN（Mozilla开发者网络）</a></li>
+<li><a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ECMAScript 6 入门（阮一峰）</a></li>
+</ol>
+<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><h3 id="为什么RN需要Node-js"><a href="#为什么RN需要Node-js" class="headerlink" title="为什么RN需要Node.js"></a>为什么RN需要Node.js</h3><ol>
+<li>提供React Packager的运行环境</li>
+<li>提供npm包管理器来安装第三方模块 (node_modules)</li>
+<li>提供一些可参考的代码规范（commonjs）</li>
+</ol>
+<h3 id="RN的基本架构"><a href="#RN的基本架构" class="headerlink" title="RN的基本架构"></a>RN的基本架构</h3><p><img src="/resources/A28F86AE1A1C71F1FC29711BAA78B8E0.jpg" alt="IMAGE"></p>
+<h3 id="npm使用"><a href="#npm使用" class="headerlink" title="npm使用"></a>npm使用</h3><ol>
+<li>npm依赖于同级目录下一个package.json文件进行，仓库的下载和依赖管理。没有这个文件可以使用npm init进行创建</li>
+<li>npm install (npm i)包安装器<ul>
+<li>附加命令 -g，安装在系统根目录中，比如说react-native-cli</li>
+<li>–save/-S 查找仓库中某某库的方法下载，并且安装，填写进入package.json文件</li>
+</ul>
+</li>
+<li>npm下载的库都会存放在同级目录下的node_modules文件夹中，此文件夹随用随装，原则上不复制、不移动、不修改、不上传</li>
+</ol>
+<h3 id="导入导出概念"><a href="#导入导出概念" class="headerlink" title="导入导出概念"></a>导入导出概念</h3><ol>
+<li>JS本身没有模块的概念，他们之间是无法自由引用的。所以node.js制定了commonjs模块贵方，方便了拆分和引用代码<a href="https://nodejs.org/docs/latest/api/modules.html" target="_blank" rel="external">参考链接</a></li>
+<li><p>提供两种引用的语法</p>
+<ul>
+<li><p>ES5 不推荐</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = moduleA;      <span class="comment">// a.js导出moduleA模块</span></div><div class="line"><span class="keyword">var</span> moduleA = <span class="built_in">require</span>(’./a’)  <span class="comment">// 同级目录下的B模块导入moduleA模块</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>ES6 推荐使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> moduleA;    <span class="comment">// a.js导出模块A</span></div><div class="line"><span class="keyword">import</span> moduleA <span class="keyword">from</span> ’./a’  <span class="comment">// b.js目录下导入同级目录的a.js文件的某个模块</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>模块查找/引用规则：</p>
+<ul>
+<li>require(‘ooxx’) – 引用node_modules/ooxx/index.js，或是node_modules/ooxx/package.json中main字段所指定的js文件</li>
+<li>require(‘./a’) – 引用同目录下的a.js文件。注意 ./ 不能省略，.js后缀可写可不写</li>
+<li>require(‘../a/b’) – 引用父目录中的a目录中的b.js文件；若b为目录名，则查找引用b目录中的index.js文件。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>npm仓库是需要翻墙的，可以使用国内的淘宝源,使用下述命令进行源的切换<br>npm config set registry <a href="https://registry.npm.taobao.org" target="_blank" rel="external">https://registry.npm.taobao.org</a> –global<br>npm config set disturl <a href="https://npm.taobao.org/dist" target="_blank" rel="external">https://npm.taobao.org/dist</a> –global</p>
+</blockquote>
+<h2 id="知识点储备"><a href="#知识点储备" class="headerlink" title="知识点储备"></a>知识点储备</h2><ol>
+<li>所有的JS文件，都会被package打包整合进入main.jsbundle文件中。</li>
+<li>main.jsbundle文件可以通过pushby/codepush（微软）进行发布后的热更新。</li>
+</ol>
+<h2 id="书籍网站推荐推荐"><a href="#书籍网站推荐推荐" class="headerlink" title="书籍网站推荐推荐"></a>书籍网站推荐推荐</h2><h3 id="JS相关"><a href="#JS相关" class="headerlink" title="JS相关"></a>JS相关</h3><ol>
+<li>JavaScript 权威指南（第6版）</li>
+<li>JavaScript 高级程序设计（第3版）</li>
+<li>JavaScript 语言精粹</li>
+</ol>
+<blockquote>
+<p>1和2为基础，二选一去看，3为使用技巧上的一些东西</p>
+</blockquote>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/01/06/2017傻瓜式总结/" class="prev">PREV</a><a href="/2017/06/05/Advanced-Apple-Debugging阅读笔记Part1/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'zhz';
+var disqus_identifier = '2017/09/10/晴明视频学习笔记-第二章/';
+var disqus_title = '晴明视频学习笔记 - 第二章';
+var disqus_url = 'http://www.zhz.io/2017/09/10/晴明视频学习笔记-第二章/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//zhz.disqus.com/count.js" async></script><div class="copyright"><p>© 2016 - 2018 <a href="http://www.zhz.io">HongZhi</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-82278125-1",'auto');ga('send','pageview');</script></body></html>
