@@ -55,10 +55,7 @@
 <h3 id="释放"><a href="#释放" class="headerlink" title="释放"></a>释放</h3><p>OK，那么我们回到文中最开始的那两个函数<br>objc_autoreleasePoolPush()<br>objc_autoreleasePoolPop(content)<br>每次调用objc_autoreleasePoolPush其实都是在给hotPage的栈顶添加一个哨兵对象，值为0，那么就会变成这个样子<br>（继续盗图<a href="https://blog.sunnyxx.com/2014/10/15/behind-autorelease/" target="_blank" rel="noopener">来源</a>）<br><img src="http://ww2.sinaimg.cn/large/51530583gw1elj5z7hawej20ji0dewff.jpg" alt="哨兵对象"><br>那么<em>objc_autoreleasePoolPush()</em>的返回值就是这个哨兵对象的地址，后续可以成为<em>objc_autoreleasePoolPop</em>的入参进行使用,于是乎就有如下结论</p>
 <ul>
 <li>根据传入的哨兵对象地址，找到对应的page页</li>
-<li>根据page页和哨兵地址，将在哨兵对象添加时间后的对象全部调用release函数，并重置next指针<blockquote>
-<p>如果最开始的page是没有哨兵的怎么办？因为page的初始化有唯一值来控制，是个static类型，如果相同，那么直接会对对象全部发送release操作，并且page清空</p>
-</blockquote>
-</li>
+<li>根据page页和哨兵地址，将在哨兵对象添加时间后的对象全部调用release函数，并重置next指针</li>
 </ul>
 <h3 id="autoRelease和runloop的关系"><a href="#autoRelease和runloop的关系" class="headerlink" title="autoRelease和runloop的关系"></a>autoRelease和runloop的关系</h3><p>这块儿没有仔细的研究，抄一抄别人写的描述,<a href="https://blog.csdn.net/u011619283/article/details/53783650" target="_blank" rel="noopener">来源</a><br>我们总是看到有文章说程序启动后，苹果在主线程 RunLoop 里注册了两个 Observer：<br>第一个 Observer 监视的事件是 Entry(即将进入Loop)，其回调内会调用 _objc_autoreleasePoolPush() 创建自动释放池。其 order 是-2147483647，优先级最高，保证创建释放池发生在其他所有回调之前。<br>第二个 Observer 监视了两个事件： BeforeWaiting(准备进入睡眠) 和 Exit(即将退出Loop)，<br>BeforeWaiting(准备进入睡眠)时调用_objc_autoreleasePoolPop() 和 _objc_autoreleasePoolPush() 释放旧的池并创建新池；<br>Exit(即将退出Loop) 时调用 _objc_autoreleasePoolPop() 来释放自动释放池。这个 Observer 的 order 是 2147483647，优先级最低，保证其释放池子发生在其他所有回调之后。<br>打印出MainRunLoop，可以看到MainRunLoop的 Common mode Items 中就有这两个观察者<br><img src="/resources/D35DF794164F53C79121DA4C53C3CA27.jpg" alt="IMAGE"></p>
 <h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><p>保证线程访问安全？<br><a href="https://blog.csdn.net/roland_sun/article/details/33728955" target="_blank" rel="noopener">Linux中mprotect()函数的用法</a><br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">protect();</div><div class="line">unprotect();</div></pre></td></tr></table></figure></p>
@@ -68,7 +65,7 @@
 <li><a href="https://blog.csdn.net/u011619283/article/details/53783650" target="_blank" rel="noopener">RunLoop总结：RunLoop 与GCD 、Autorelease Pool之间的关系</a></li>
 </ol>
 <!--定义-->
-</div></article></div></main><footer><div class="paginator"><a href="/2018/05/05/OC-疯人院-引用计数/" class="prev">上一篇</a><a href="/2018/05/05/OC-疯人院-ISA/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'zhz';
+</div></article></div></main><footer><div class="paginator"><a href="/2018/05/05/OC-疯人院-引用计数/" class="prev">PREV</a><a href="/2018/05/05/OC-疯人院-ISA/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'zhz';
 var disqus_identifier = '2018/05/05/OC-疯人院-Autorelease/';
 var disqus_title = 'OC 疯人院 - Autorelease';
 var disqus_url = 'http://www.zhz.io/2018/05/05/OC-疯人院-Autorelease/';
